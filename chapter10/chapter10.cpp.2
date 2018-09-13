@@ -1,0 +1,75 @@
+#include <iostream>
+#include <cstring>
+
+using std::cout;
+using std::endl;
+using std::cin;
+
+class test
+{
+public:
+    test();
+    test(int a);
+    ~test();
+    void show() const;
+    int showB() const
+    {
+        cout << "Inline showB!" << endl;
+        return mB;
+    }
+
+    const test& GetLarger(const test& another) const;
+private:
+    int mA = 0;
+    int mB;
+};
+
+
+int main()
+{
+    test t1(14);
+    t1.show();
+
+    const test t2 = test(15);
+    t2.show();
+    t2.showB();
+
+    auto larger = t1.GetLarger(t2); 
+    larger.show();
+
+    const int size = 4;
+    test myTest[size];
+    for(int i = 0; i < size; i++)
+    {
+        myTest[i].show();
+    }
+
+    return 0;
+}
+
+test::test()
+{
+    cout << "default constructor called!" << endl;
+}
+
+test::test(int a)
+{
+    this->mA = a;
+    cout << "2nd constructor called! param: " << a << endl;
+}
+
+test::~test()
+{
+    cout << "Destructor called!" << endl;
+}
+
+void test::show() const
+{
+    cout << "A's value is : " << this->mA << endl;
+}
+
+const test& test::GetLarger(const test& another) const
+{
+    //this指针的用法
+    return this->mA >= another.mA ? *this : another;
+}
