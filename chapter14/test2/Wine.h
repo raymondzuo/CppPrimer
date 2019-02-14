@@ -9,7 +9,7 @@ typedef std::valarray<int> ArrayInt;
 typedef std::pair<ArrayInt, ArrayInt> PairArray;
 using std::string;
 
-class Wine : string, PairArray
+class Wine : private string, private PairArray
 {
 private:
     int yearCnt;
